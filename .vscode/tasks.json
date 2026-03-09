@@ -1,0 +1,68 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Backend (.NET)",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/backend/FWCommunityHub.Api"
+      },
+      "group": "build",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Build Frontend (Angular)",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "build"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/frontend/fw-community-hub"
+      },
+      "windows": {
+        "command": "cmd",
+        "args": [
+          "/c",
+          "npm",
+          "run",
+          "build"
+        ]
+      },
+      "osx": {
+        "command": "npm",
+        "args": [
+          "run",
+          "build"
+        ]
+      },
+      "linux": {
+        "command": "npm",
+        "args": [
+          "run",
+          "build"
+        ]
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build All",
+      "dependsOn": [
+        "Build Backend (.NET)",
+        "Build Frontend (Angular)"
+      ],
+      "dependsOrder": "sequence",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

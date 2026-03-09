@@ -1,0 +1,40 @@
+<!-- Shows loading, error, or data states depending on API request status. -->
+<section>
+  <!-- Loading state while waiting for HTTP response. -->
+  <p *ngIf="isLoading" class="rounded-md bg-white p-4 text-slate-600 shadow-sm ring-1 ring-slate-200">
+    Loading resources...
+  </p>
+  <!-- Error state when API call fails. -->
+  <p *ngIf="!isLoading && errorMessage" class="rounded-md bg-red-50 p-4 text-red-700 ring-1 ring-red-200">
+    {{ errorMessage }}
+  </p>
+
+  <!-- Success state: render one card per resource. -->
+  <div class="grid gap-4" *ngIf="!isLoading && !errorMessage">
+    <article
+      class="rounded-xl bg-white p-5 shadow-sm ring-1 ring-slate-200"
+      *ngFor="let resource of resources; trackBy: trackByResourceId"
+    >
+      <h3 class="text-xl font-semibold text-slate-900">{{ resource.name }}</h3>
+      <p class="mt-2 text-slate-600">{{ resource.description }}</p>
+      <ul class="mt-4 list-disc space-y-1 pl-5 text-slate-700 marker:text-slate-400">
+        <li><span class="font-semibold text-slate-900">Category:</span> {{ resource.category }}</li>
+        <li><span class="font-semibold text-slate-900">Address:</span> {{ resource.address }}</li>
+        <li><span class="font-semibold text-slate-900">Phone:</span> {{ resource.phoneNumber }}</li>
+        <li>
+          <span class="font-semibold text-slate-900">Website:</span>
+          <a
+            [href]="resource.website"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="break-all text-blue-700 underline decoration-blue-300 hover:text-blue-600"
+          >
+            {{ resource.website }}
+          </a>
+        </li>
+        <li><span class="font-semibold text-slate-900">Hours:</span> {{ resource.hoursOfOperation }}</li>
+        <li><span class="font-semibold text-slate-900">24 Hours:</span> {{ resource.is24Hours ? 'Yes' : 'No' }}</li>
+      </ul>
+    </article>
+  </div>
+</section>

@@ -300,6 +300,8 @@ FakesAssemblies/
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 node_modules/
+frontend/fw-community-hub/dist/
+frontend/fw-community-hub/.angular/
 
 # Visual Studio 6 build log
 *.plg
