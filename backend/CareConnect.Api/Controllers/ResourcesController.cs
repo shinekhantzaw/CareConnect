@@ -1,8 +1,8 @@
-using FWCommunityHub.Api.Models;
-using FWCommunityHub.Api.Services;
+using CareConnect.Api.Models;
+using CareConnect.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FWCommunityHub.Api.Controllers;
+namespace CareConnect.Api.Controllers;
 
 // Marks this class as an API controller with automatic request/response behavior.
 [ApiController]

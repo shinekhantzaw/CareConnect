@@ -4,8 +4,8 @@ set -e
 # CareConnect - Run Script
 # Starts the backend (ASP.NET Core) and frontend (Angular) concurrently.
 
-BACKEND_DIR="backend/FWCommunityHub.Api"
-FRONTEND_DIR="frontend/fw-community-hub"
+BACKEND_DIR="backend/CareConnect.Api"
+FRONTEND_DIR="frontend/careconnect"
 
 BACKEND_PID=""
 FRONTEND_PID=""

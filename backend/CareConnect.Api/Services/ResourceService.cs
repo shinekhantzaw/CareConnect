@@ -1,7 +1,7 @@
 
-using FWCommunityHub.Api.Models;
+using CareConnect.Api.Models;
 
-namespace FWCommunityHub.Api.Services;
+namespace CareConnect.Api.Services;
 
 // Simple in-memory service used for demo data (no database yet).
 public class ResourceService : IResourceService

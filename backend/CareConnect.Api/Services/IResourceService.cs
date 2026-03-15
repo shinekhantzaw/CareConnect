@@ -1,6 +1,6 @@
-using FWCommunityHub.Api.Models;
+using CareConnect.Api.Models;
 
-namespace FWCommunityHub.Api.Services;
+namespace CareConnect.Api.Services;
 
 // Service contract for retrieving community resources.
 public interface IResourceService

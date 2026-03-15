@@ -1,4 +1,4 @@
-namespace FWCommunityHub.Api.Models;
+namespace CareConnect.Api.Models;
 
 // Represents one community resource record returned by the API.
 public class Resource

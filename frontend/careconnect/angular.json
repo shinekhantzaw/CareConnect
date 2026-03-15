@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "fw-community-hub": {
+    "careconnect": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/fw-community-hub",
+            "outputPath": "dist/careconnect",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "fw-community-hub:build:production"
+              "buildTarget": "careconnect:build:production"
             },
             "development": {
-              "buildTarget": "fw-community-hub:build:development"
+              "buildTarget": "careconnect:build:development"
             }
           },
           "defaultConfiguration": "development"
