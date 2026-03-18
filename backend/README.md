@@ -3,7 +3,7 @@
 ## Run API
 
 ```bash
-cd backend/FWCommunityHub.Api
+cd backend/CareConnect.Api
 dotnet restore
 dotnet run
 ```

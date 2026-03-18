@@ -1,58 +1,48 @@
 #!/usr/bin/env bash
+set -e
 
-set -euo pipefail
+# CareConnect - Run Script
+# Starts the backend (ASP.NET Core) and frontend (Angular) concurrently.
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BACKEND_DIR="$ROOT_DIR/backend/FWCommunityHub.Api"
-FRONTEND_DIR="$ROOT_DIR/frontend/fw-community-hub"
+BACKEND_DIR="backend/CareConnect.Api"
+FRONTEND_DIR="frontend/careconnect"
 
-DOTNET_BIN=""
-if command -v dotnet >/dev/null 2>&1; then
-  DOTNET_BIN="dotnet"
-elif [ -x "/c/Program Files/dotnet/dotnet.exe" ]; then
-  DOTNET_BIN="/c/Program Files/dotnet/dotnet.exe"
-elif [ -x "/c/Program Files (x86)/dotnet/dotnet.exe" ]; then
-  DOTNET_BIN="/c/Program Files (x86)/dotnet/dotnet.exe"
-else
-  echo "Error: dotnet is not installed or not in PATH."
-  exit 1
-fi
-
-if ! command -v npm >/dev/null 2>&1; then
-  echo "Error: npm is not installed or not in PATH."
-  exit 1
-fi
-
-if [ ! -d "$BACKEND_DIR" ]; then
-  echo "Error: backend directory not found: $BACKEND_DIR"
-  exit 1
-fi
-
-if [ ! -d "$FRONTEND_DIR" ]; then
-  echo "Error: frontend directory not found: $FRONTEND_DIR"
-  exit 1
-fi
-
-echo "Starting backend at http://localhost:5000 ..."
-(
-  cd "$BACKEND_DIR"
-  "$DOTNET_BIN" restore
-  "$DOTNET_BIN" run
-) &
-BACKEND_PID=$!
+BACKEND_PID=""
+FRONTEND_PID=""
 
 cleanup() {
   echo ""
-  echo "Stopping backend (PID: $BACKEND_PID) ..."
-  kill "$BACKEND_PID" >/dev/null 2>&1 || true
+  echo "Shutting down..."
+  [[ -n "$BACKEND_PID" ]] && kill "$BACKEND_PID" 2>/dev/null
+  [[ -n "$FRONTEND_PID" ]] && kill "$FRONTEND_PID" 2>/dev/null
+  wait 2>/dev/null
+  echo "Done."
 }
 trap cleanup EXIT INT TERM
 
-if [ ! -d "$FRONTEND_DIR/node_modules" ]; then
-  echo "Installing frontend dependencies (first run) ..."
-  (cd "$FRONTEND_DIR" && npm install)
-fi
+# ── Backend ──────────────────────────────────────────────────────────────────
+echo "[backend] Restoring dependencies..."
+(cd "$BACKEND_DIR" && dotnet restore --nologo -q)
 
-echo "Starting frontend at http://localhost:4200 ..."
-cd "$FRONTEND_DIR"
-npm start
+echo "[backend] Starting on http://localhost:5000 ..."
+(cd "$BACKEND_DIR" && dotnet run --no-restore) &
+BACKEND_PID=$!
+
+# ── Frontend ─────────────────────────────────────────────────────────────────
+echo "[frontend] Installing dependencies..."
+(cd "$FRONTEND_DIR" && npm install --silent)
+
+echo "[frontend] Starting on http://localhost:4200 ..."
+(cd "$FRONTEND_DIR" && npm start) &
+FRONTEND_PID=$!
+
+# ── Wait ─────────────────────────────────────────────────────────────────────
+echo ""
+echo "Both services are starting:"
+echo "  Frontend → http://localhost:4200"
+echo "  Backend  → http://localhost:5000  (Swagger: http://localhost:5000/swagger)"
+echo ""
+echo "Press Ctrl+C to stop."
+echo ""
+
+wait "$BACKEND_PID" "$FRONTEND_PID"

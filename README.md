@@ -1,6 +1,6 @@
-# FW Community Hub
+# CareConnect
 
-FW Community Hub is an AI-powered web application that helps residents in Fort Wayne, Indiana quickly find local community resources such as food banks, housing assistance, legal aid, healthcare, and crisis support.
+CareConnect is an AI-powered web application that helps residents in Fort Wayne, Indiana quickly find local community resources such as food banks, housing assistance, legal aid, healthcare, and crisis support.
 
 Instead of navigating multiple websites or outdated directories, users can search using natural language like:
 
@@ -34,7 +34,7 @@ People in crisis should not have to navigate complicated systems to get help.
 
 ## 💡 Solution
 
-FW Community Hub provides a fast and simple way to locate community resources.
+CareConnect provides a fast and simple way to locate community resources.
 
 Key features include:
 
@@ -141,13 +141,13 @@ External Services
 
 Backend:
 
-cd backend  
+cd backend/CareConnect.Api  
 dotnet restore  
 dotnet run  
 
 Frontend:
 
-cd frontend  
+cd frontend/careconnect  
 npm install  
 ng serve  
 

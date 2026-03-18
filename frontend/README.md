@@ -3,7 +3,7 @@
 ## Run Angular App
 
 ```bash
-cd frontend/fw-community-hub
+cd frontend/careconnect
 npm install
 npm start
 ```
